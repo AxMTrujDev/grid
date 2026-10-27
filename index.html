@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Grid de Iluminação – Teatro Bancários</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+<header>
+  <h1>🎭 Grid de Iluminação · Teatro Bancários</h1>
+  <select id="show"></select>
+  <button id="newShow">+ Espetáculo</button>
+  <button id="dup">Duplicar</button>
+  <button id="delShow">Excluir</button>
+  <button id="exp">Exportar</button>
+  <button id="imp">Importar</button>
+  <button id="prt">Imprimir</button>
+  <input type="file" id="file" accept=".json" hidden>
+</header>
+<main>
+<aside>
+  <div class="card" style="margin-bottom:12px">
+    <h2>Modo</h2>
+    <div class="row" id="modes">
+      <button data-m="place" class="on">Colocar</button>
+      <button data-m="edit">Editar</button>
+      <button data-m="erase">Apagar</button>
+      <button data-m="paint">Pintar</button>
+      <button data-m="outlet">Bloquear tomada</button>
+    </div>
+    <h2>Equipamentos</h2>
+    <div id="pal"></div>
+    <h2 style="margin-top:10px">Cor rápida</h2>
+    <div class="row" id="sw"></div>
+    <div class="muted" style="font-size:12px;margin-bottom:6px">Clique numa cor e depois nos equipamentos (modo Pintar). Em Editar, a cor vai direto para o equipamento selecionado.</div>
+    <div class="row">Cor do tipo selecionado <input type="color" id="tc"></div>
+    <div class="row" style="margin-top:8px">
+      <input id="cn" placeholder="Novo tipo" size="9">
+      <input id="cw" type="number" value="500" title="Watts">W
+      <button id="addType">+</button>
+    </div>
+    <div class="row"><button id="delType" title="Exclui o tipo que está selecionado na lista">Excluir tipo selecionado</button>
+    </div>
+    <div class="row"><button id="clear">Limpar equipamentos</button><button id="theme">Tema</button></div>
+  </div>
+  <div class="card" id="editor" hidden>
+    <h2>Editar equipamento</h2>
+    <div class="row">Canal <input id="e_ch" size="5"></div>
+    <div class="row">Cor/gelatina <input id="e_gel" size="10" placeholder="ex: L201"></div>
+    <div class="row">Obs. <input id="e_note" size="16" placeholder="foco, área…"></div>
+    <div class="row"><button id="e_save">Salvar</button></div>
+  </div>
+</aside>
+<section class="card">
+  <div class="row noprint"><span class="muted"><span style="color:var(--ok)">■</span> tomada livre · tracejada = bloqueada · LD/LE = eletrocalhas laterais</span></div>
+  <div class="row noprint" id="tabs"><button data-v="2d" class="on">Planta 2D</button><button data-v="3d">Modelo 3D</button></div>
+  <div class="wrap" id="v2"><div id="plan"></div></div>
+  <div id="v3" hidden>
+   <div class="row noprint"><label><input type="checkbox" id="lp" checked>Palco</label><label><input type="checkbox" id="lt" checked>Plateia</label><label><input type="checkbox" id="ls">Separar</label><label><input type="checkbox" id="lb" checked>Feixes</label><label>Palco começa em <select id="dv"></select></label></div>
+   <div id="cv"><div id="tip"></div></div>
+   <p class="muted noprint">Arraste para girar · roda ou pinça para zoom · clique numa tomada para aplicar o modo atual (Colocar, Apagar…).</p>
+  </div>
+  <h2 style="margin-top:12px">Resumo</h2>
+  <div id="sum"></div>
+</section>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
